@@ -108,6 +108,22 @@ app.post('/api/candidate', ({ body }, res) => {
     });
 });
 
+app.get('/api/parties', (req, res) => {
+    const sql = `SELECT * FROM parties`;
+    db.query(sql, (err, rows) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({
+        message: 'success',
+        data: rows
+      });
+    });
+  });
+
+
+
   // Default response for any other request (Not Found)
 app.use((req, res) => {
     res.status(404).end();
